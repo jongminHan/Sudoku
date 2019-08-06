@@ -1,0 +1,3 @@
+﻿  main.cpp
+Sudoku.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Sudoku::SolveGrid(void)" (?SolveGrid@Sudoku@@QAE_NXZ) referenced in function "public: void __thiscall Sudoku::CreateSeed(void)" (?CreateSeed@Sudoku@@QAEXXZ)
+C:\Users\Jongmin\source\repos\Sudoku\Debug\Sudoku.exe : fatal error LNK1120: 1 unresolved externals
