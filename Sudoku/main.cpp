@@ -7,10 +7,9 @@ int main()
 	Sudoku* puzzle = new Sudoku();
 
 	puzzle->CreateSeed();
-	//puzzle->GenPuzzle();
-	//puzzle->CalculateDifficulty();
+	puzzle->GenPuzzle();
+	puzzle->CalculateDifficulty();
 	puzzle->PrintGrid();
-
 	delete puzzle;
 	return 0;
 }

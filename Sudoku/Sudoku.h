@@ -8,8 +8,6 @@
 #include <string>
 #include <vector>
 
-#define UNASSIGNED 0
-
 class Sudoku
 {
 public:
@@ -22,7 +20,10 @@ public:
 	void GenPuzzle();
 	void CalculateDifficulty();
 	int BranchDifficultyScore();
+	bool FindUnassignedLocation(int grid[9][9], int& row, int& col);
+	bool IsSafe(int grid[9][9], int row, int col, int num);
 private:
+	const static int UNASSIGNED = 0;
 	int mGrid[9][9];
 	int mSolnGrid[9][9];
 	int mGuessNum[9];
