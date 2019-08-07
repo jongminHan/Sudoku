@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	// Creating an instance of Sudoku
-	Sudoku *puzzle = new Sudoku();
+	Sudoku* puzzle = new Sudoku();
 
 	// Creating a seed for puzzle generation
 	puzzle->CreateSeed();

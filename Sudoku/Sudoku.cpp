@@ -38,7 +38,7 @@ Sudoku::Sudoku()
 		mGridPos[i] = i;
 	}
 
-	std::random_shuffle(mGridPos, (mGridPos)+81, genRandNum);
+	std::random_shuffle(mGridPos, mGridPos + 81, genRandNum);
 
 	// Randomly shuffling the guessing number array
 	for (int i = 0; i < 9; i++)
@@ -46,7 +46,7 @@ Sudoku::Sudoku()
 		mGuessNum[i] = i + 1;
 	}
 
-	std::random_shuffle(mGuessNum, (mGuessNum)+9, genRandNum);
+	std::random_shuffle(mGuessNum, mGuessNum + 9, genRandNum);
 
 	// Initialising the mGrid
 	for (int i = 0; i < 9; i++)
@@ -69,9 +69,13 @@ void Sudoku::PrintGrid()
 		for (int j = 0; j < 9; j++)
 		{
 			if (mGrid[i][j] == 0)
+			{
 				std::cout << ".";
+			}
 			else
+			{
 				std::cout << mGrid[i][j];
+			}
 			std::cout << "|";
 		}
 		std::cout << std::endl;
@@ -84,14 +88,16 @@ void Sudoku::PrintGrid()
 
 
 // START: Helper functions for solving mGrid
-bool FindUnassignedLocation(int grid[9][9], int &row, int &col)
+bool Sudoku::FindUnassignedLocation(int grid[9][9], int &row, int &col)
 {
 	for (row = 0; row < 9; row++)
 	{
 		for (col = 0; col < 9; col++)
 		{
 			if (grid[row][col] == UNASSIGNED)
+			{
 				return true;
+			}
 		}
 	}
 
@@ -103,7 +109,9 @@ bool UsedInRow(int grid[9][9], int row, int num)
 	for (int col = 0; col < 9; col++)
 	{
 		if (grid[row][col] == num)
+		{
 			return true;
+		}
 	}
 
 	return false;
@@ -114,7 +122,9 @@ bool UsedInCol(int grid[9][9], int col, int num)
 	for (int row = 0; row < 9; row++)
 	{
 		if (grid[row][col] == num)
+		{
 			return true;
+		}
 	}
 
 	return false;
@@ -127,7 +137,9 @@ bool UsedInBox(int grid[9][9], int boxStartRow, int boxStartCol, int num)
 		for (int col = 0; col < 3; col++)
 		{
 			if (grid[row + boxStartRow][col + boxStartCol] == num)
+			{
 				return true;
+			}
 		}
 	}
 
@@ -149,9 +161,11 @@ bool Sudoku::SolveGrid()
 
 	// If there is no unassigned location, we are done
 	if (!FindUnassignedLocation(mGrid, row, col))
+	{
 		return true; // success!
+	}
 
-	   // Consider digits 1 to 9
+	// Consider digits 1 to 9
 	for (int num = 0; num < 9; num++)
 	{
 		// if looks promising
@@ -162,7 +176,9 @@ bool Sudoku::SolveGrid()
 
 			// return, if success, yay!
 			if (SolveGrid())
+			{
 				return true;
+			}
 
 			// failure, unmake & try again
 			mGrid[row][col] = UNASSIGNED;
@@ -207,8 +223,8 @@ void Sudoku::GenPuzzle()
 {
 	for (int i = 0; i < 81; i++)
 	{
-		int x = (mGridPos[i]) / 9;
-		int y = (mGridPos[i]) % 9;
+		int x = mGridPos[i] / 9;
+		int y = mGridPos[i] % 9;
 		int temp = mGrid[x][y];
 		mGrid[x][y] = UNASSIGNED;
 
@@ -274,7 +290,9 @@ int Sudoku::BranchDifficultyScore()
 		for (int i = 0; i < check; i++)
 		{
 			if (empty[i].size() < empty[minIndex].size())
+			{
 				minIndex = i;
+			}
 		}
 
 		int branchFactor = empty[minIndex].size();
@@ -304,7 +322,9 @@ void Sudoku::CalculateDifficulty()
 		for (int j = 0; j < 9; j++)
 		{
 			if (mGrid[i][j] == 0)
+			{
 				emptyCells++;
+			}
 		}
 	}
 
