@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 class Sudoku
 {

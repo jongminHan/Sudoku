@@ -236,6 +236,7 @@ void Sudoku::GenPuzzle()
 			mGrid[x][y] = temp;
 		}
 	}
+	std::cout << std::endl;
 }
 // END: Generate puzzle
 
