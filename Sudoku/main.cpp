@@ -1,5 +1,22 @@
-#include "Sudoku.h"
+#include "Game.h"
 
+int main()
+{
+	// Create the game object
+	Game* game = new Game();
+
+	// Initialize and run the game
+	if (game->Init())
+	{
+		game->Run();
+	}
+
+	// Clean up
+	delete game;
+	return 0;
+}
+
+/*
 // START: The main function
 int main(int argc, char const *argv[])
 {
@@ -15,9 +32,6 @@ int main(int argc, char const *argv[])
 	// Generating the puzzle
 	puzzle->GenPuzzle();
 
-	// Calculating difficulty of puzzle
-	puzzle->CalculateDifficulty();
-
 	// testing by printing the mGrid
 	puzzle->PrintGrid();
 
@@ -26,3 +40,4 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 // END: The main function
+*/
