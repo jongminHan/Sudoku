@@ -26,6 +26,7 @@ public:
 	void CountSoln(int& number);
 	void GenPuzzle();
 	bool FindUnassignedLocation(int grid[9][9], int& row, int& col);
+	int GetGrid(int row, int col);
 private:
 	static const int UNASSIGNED = 0;
 	int mGrid[9][9];

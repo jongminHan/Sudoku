@@ -6,12 +6,21 @@ Game::Game()
 
 bool Game::Init()
 {
-	mWindow.create(sf::VideoMode(WIDTH, HEIGHT), "Monty Hall Problem Simulator");
-	mGui = std::make_shared<tgui::Gui>(mWindow); // Create the gui and attach it to the window
-
 	// Initialising seed for random number generation
 	srand(static_cast<unsigned int>(time(nullptr)));
 
+	// Creating an instance of Sudoku
+	mSudoku = std::make_shared<Sudoku>();
+
+	// Creating a seed for puzzle generation
+	mSudoku->CreateSeed();
+
+	// Generating the puzzle
+	mSudoku->GenPuzzle();
+
+	mWindow.create(sf::VideoMode(WIDTH, HEIGHT), "Sudoku!");
+	mGui = std::make_shared<tgui::Gui>(mWindow); // Create the gui and attach it to the window
+	
 	tgui::EditBox::Ptr sudokuArray[81];
 	tgui::EditBox::Ptr editBox;
 
@@ -22,7 +31,20 @@ bool Game::Init()
 			editBox = tgui::EditBox::create();
 			editBox->setPosition(150 + 60 * i, 60 + 60 * j);
 			editBox->setSize(50, 50);
+			editBox->setAlignment(tgui::EditBox::Alignment::Center);
+
+
+			int gridNum = mSudoku->GetGrid(i, j);
+			
+			if (gridNum != 0) // Show no number if the given number is zero.
+			{
+				sf::String sfStr(std::to_string(gridNum));
+				editBox->setDefaultText(sfStr);
+				editBox->setEnabled(false);
+			}
+
 			sudokuArray[i * 9 + j] = editBox;
+			
 		}
 	}
 
@@ -53,7 +75,7 @@ void Game::Run()
 			mGui->handleEvent(event); // Pass the event to the widgets
 		}
 
-		mWindow.clear();
+		mWindow.clear(sf::Color::White);
 		mGui->draw(); // Draw all widgets
 		mWindow.display();
 	}

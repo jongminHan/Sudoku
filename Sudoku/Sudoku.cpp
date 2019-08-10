@@ -147,6 +147,10 @@ bool Sudoku::FindUnassignedLocation(int grid[9][9], int& row, int& col)
 	return false;
 }
 
+int Sudoku::GetGrid(int row, int col)
+{
+	return mGrid[row][col];
+}
 
 // START: Modified and improved Sudoku solver
 bool Sudoku::SolveGrid()
