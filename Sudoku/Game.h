@@ -15,4 +15,5 @@ private:
 	std::shared_ptr<tgui::Gui> mGui;
 	std::shared_ptr<Sudoku> mSudoku;
 	sf::RenderWindow mWindow;
+	tgui::EditBox::Ptr mSudokuEditBoxGrid[81];
 };

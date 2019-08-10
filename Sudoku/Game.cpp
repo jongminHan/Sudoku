@@ -20,8 +20,7 @@ bool Game::Init()
 
 	mWindow.create(sf::VideoMode(WIDTH, HEIGHT), "Sudoku!");
 	mGui = std::make_shared<tgui::Gui>(mWindow); // Create the gui and attach it to the window
-	
-	tgui::EditBox::Ptr sudokuArray[81];
+
 	tgui::EditBox::Ptr editBox;
 
 	for (int i = 0; i < 9; i++)
@@ -35,7 +34,7 @@ bool Game::Init()
 
 
 			int gridNum = mSudoku->GetGrid(i, j);
-			
+
 			if (gridNum != 0) // Show no number if the given number is zero.
 			{
 				sf::String sfStr(std::to_string(gridNum));
@@ -43,8 +42,9 @@ bool Game::Init()
 				editBox->setEnabled(false);
 			}
 
-			sudokuArray[i * 9 + j] = editBox;
-			
+			editBox->connect("TextChanged", /*Write lambda function here later*/);
+			mSudokuEditBoxGrid[i * 9 + j] = editBox;
+
 		}
 	}
 
@@ -52,7 +52,7 @@ bool Game::Init()
 	{
 		for (int j = 0; j < 9; j++)
 		{
-			mGui->add(sudokuArray[i * 9 + j]);
+			mGui->add(mSudokuEditBoxGrid[i * 9 + j]);
 		}
 	}
 
@@ -61,7 +61,6 @@ bool Game::Init()
 
 void Game::Run()
 {
-
 	while (mWindow.isOpen())
 	{
 		sf::Event event;
