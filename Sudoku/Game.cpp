@@ -2,10 +2,6 @@
 
 Game::Game()
 {
-}
-
-bool Game::Init()
-{
 	// Initialising seed for random number generation
 	srand(static_cast<unsigned int>(time(nullptr)));
 
@@ -18,6 +14,23 @@ bool Game::Init()
 	// Generating the puzzle
 	mSudoku->GenPuzzle();
 
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			mSudokuGrid[i][j] = mSudoku->GetGrid(i, j);
+		}
+	}
+}
+
+void Game::InputFromUser(int row, int col)
+{
+
+
+}
+
+bool Game::Init()
+{
 	mWindow.create(sf::VideoMode(WIDTH, HEIGHT), "Sudoku!");
 	mGui = std::make_shared<tgui::Gui>(mWindow); // Create the gui and attach it to the window
 
@@ -32,8 +45,9 @@ bool Game::Init()
 			editBox->setSize(50, 50);
 			editBox->setAlignment(tgui::EditBox::Alignment::Center);
 
+			editBox->connect("TextChanged", &Game::InputFromUser, this, i, j);
 
-			int gridNum = mSudoku->GetGrid(i, j);
+			int gridNum = mSudokuGrid[i][j];
 
 			if (gridNum != 0) // Show no number if the given number is zero.
 			{
@@ -42,7 +56,6 @@ bool Game::Init()
 				editBox->setEnabled(false);
 			}
 
-			editBox->connect("TextChanged", /*Write lambda function here later*/);
 			mSudokuEditBoxGrid[i * 9 + j] = editBox;
 
 		}
