@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <memory>
 
 Game::Game()
 {
@@ -23,10 +24,9 @@ Game::Game()
 	}
 }
 
-void Game::InputFromUser(int row, int col)
+void Game::signalHandler(int row, int col, tgui::EditBox::Ptr widget)
 {
-
-
+	mSudokuGrid[row][col] = std::stoi(widget->getText().toAnsiString());
 }
 
 bool Game::Init()
@@ -34,6 +34,11 @@ bool Game::Init()
 	mWindow.create(sf::VideoMode(WIDTH, HEIGHT), "Sudoku!");
 	mGui = std::make_shared<tgui::Gui>(mWindow); // Create the gui and attach it to the window
 
+	return true;
+}
+
+void Game::Run()
+{
 	tgui::EditBox::Ptr editBox;
 
 	for (int i = 0; i < 9; i++)
@@ -44,8 +49,6 @@ bool Game::Init()
 			editBox->setPosition(150 + 60 * i, 60 + 60 * j);
 			editBox->setSize(50, 50);
 			editBox->setAlignment(tgui::EditBox::Alignment::Center);
-
-			editBox->connect("TextChanged", &Game::InputFromUser, this, i, j);
 
 			int gridNum = mSudokuGrid[i][j];
 
@@ -58,6 +61,7 @@ bool Game::Init()
 
 			mSudokuEditBoxGrid[i * 9 + j] = editBox;
 
+			editBox->connect("TextChanged", &Game::signalHandler, this, i, j, editBox);
 		}
 	}
 
@@ -69,11 +73,6 @@ bool Game::Init()
 		}
 	}
 
-	return true;
-}
-
-void Game::Run()
-{
 	while (mWindow.isOpen())
 	{
 		sf::Event event;

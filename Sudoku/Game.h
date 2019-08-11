@@ -9,7 +9,7 @@ public:
 	virtual ~Game() = default;
 	bool Init();
 	void Run();
-	void InputFromUser(int row, int col);
+	void signalHandler(int row, int col, tgui::EditBox::Ptr widget);
 private:
 	const int WIDTH = 1280;
 	const int HEIGHT = 720;
