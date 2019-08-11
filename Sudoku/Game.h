@@ -1,6 +1,7 @@
 #pragma once
 #include <TGUI/TGUI.hpp>
 #include "Sudoku.h"
+#include "HelperFunctions.h"
 
 class Game
 {
