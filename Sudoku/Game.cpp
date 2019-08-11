@@ -107,15 +107,15 @@ void Game::Run()
 		line2[1].color = sf::Color::Red;
 
 		sf::Vertex line3[2];
-		line3[0].position = sf::Vector2f(150, 415);
+		line3[0].position = sf::Vector2f(325, 60);
 		line3[0].color = sf::Color::Red;
-		line3[1].position = sf::Vector2f(680, 415);
+		line3[1].position = sf::Vector2f(325, 590);
 		line3[1].color = sf::Color::Red;
 
 		sf::Vertex line4[2];
-		line4[0].position = sf::Vector2f(150, 415);
+		line4[0].position = sf::Vector2f(505, 60);
 		line4[0].color = sf::Color::Red;
-		line4[1].position = sf::Vector2f(680, 415);
+		line4[1].position = sf::Vector2f(505, 590);
 		line4[1].color = sf::Color::Red;
 
 		mWindow.clear(sf::Color::White);
