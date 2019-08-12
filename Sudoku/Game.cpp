@@ -29,15 +29,25 @@ void Game::signalHandler(int row, int col, tgui::EditBox::Ptr editBox)
 	try
 	{
 		int enteredNum = std::stoi(editBox->getText().toAnsiString());
-		mSudokuGrid[row][col] = enteredNum;
+		
 
 		if (!IsSafe(mSudokuGrid, row, col, enteredNum)) // If the given number is not safe then,
 		{
 			std::cout << "Warning!\n";
+			mSudokuGrid[row][col] = enteredNum;
+		}
+		else
+		{
+			std::cout << "Safe\n";
+			mSudokuGrid[row][col] = enteredNum;
 		}
 	}
 	catch (std::invalid_argument)
 	{
+		if (editBox->getText().toAnsiString().size() == 0)  // Remove the assigned number when the number is deleted
+		{	
+			mSudokuGrid[row][col] = 0;
+		}
 		return;
 	}
 	
