@@ -24,7 +24,7 @@ Game::Game()
 	}
 }
 
-void Game::signalHandler(int row, int col, tgui::EditBox::Ptr editBox)
+void Game::signalHandler(int row, int col, tgui::EditBox::Ptr editBox, tgui::Label::Ptr label)
 {
 	try
 	{
@@ -33,7 +33,7 @@ void Game::signalHandler(int row, int col, tgui::EditBox::Ptr editBox)
 
 		if (!IsSafe(mSudokuGrid, row, col, enteredNum)) // If the given number is not safe then,
 		{
-			std::cout << "Warning!\n";
+			label->setText("Warning!");
 			mSudokuGrid[row][col] = enteredNum;
 		}
 		else
@@ -47,6 +47,7 @@ void Game::signalHandler(int row, int col, tgui::EditBox::Ptr editBox)
 		if (editBox->getText().toAnsiString().size() == 0)  // Remove the assigned number when the number is deleted
 		{	
 			mSudokuGrid[row][col] = 0;
+			label->setText(""); // Remove the text
 		}
 		return;
 	}
@@ -64,6 +65,20 @@ bool Game::Init()
 
 void Game::Run()
 {
+	tgui::Label::Ptr winLabel = tgui::Label::create();
+	winLabel->setPosition(720, 150);
+	winLabel->setSize(267.2f, 78.7863f);
+	winLabel->setTextSize(50);
+	winLabel->getRenderer()->setTextColor(tgui::Color::Red);
+	mGui->add(winLabel);
+
+	tgui::Button::Ptr newGameButton = tgui::Button::create();
+	newGameButton->setPosition(720, 520);
+	newGameButton->setSize(190.f, 69.6667f);
+	newGameButton->setTextSize(25);
+	newGameButton->setText("New Game");
+	mGui->add(newGameButton);
+
 	tgui::EditBox::Ptr editBox;
 
 	for (int i = 0; i < 9; i++)
@@ -86,11 +101,11 @@ void Game::Run()
 
 			mSudokuEditBoxGrid[i * 9 + j] = editBox;
 			mGui->add(editBox);
-			editBox->connect("TextChanged", &Game::signalHandler, this, i, j, editBox);
+			editBox->connect("TextChanged", &Game::signalHandler, this, i, j, editBox, winLabel);
 		}
 	}
 
-	
+
 	while (mWindow.isOpen())
 	{
 		sf::Event event;
@@ -129,6 +144,7 @@ void Game::Run()
 		line4[1].color = sf::Color::Red;
 
 		mWindow.clear(sf::Color::White);
+
 		mGui->draw(); // Draw all widgets
 		mWindow.draw(line1, 2, sf::Lines);
 		mWindow.draw(line2, 2, sf::Lines);
