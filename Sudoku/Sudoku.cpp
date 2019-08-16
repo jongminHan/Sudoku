@@ -96,6 +96,11 @@ int Sudoku::GetGrid(int row, int col)
 	return mGrid[row][col];
 }
 
+int Sudoku::GetSolutionGrid(int row, int col)
+{
+	return mSolnGrid[row][col];
+}
+
 // START: Modified and improved Sudoku solver
 bool Sudoku::SolveGrid()
 {

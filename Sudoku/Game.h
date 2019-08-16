@@ -1,5 +1,6 @@
 #pragma once
 #include <TGUI/TGUI.hpp>
+#include <memory>
 #include "Sudoku.h"
 #include "HelperFunctions.h"
 
@@ -10,6 +11,8 @@ public:
 	virtual ~Game() = default;
 	bool Init();
 	void Run();
+	void CreateNewGameSignal();
+	void CreateNewGameSignalFromChild(tgui::ChildWindow::Ptr childWindow);
 	void signalHandler(int row, int col, tgui::EditBox::Ptr widget, tgui::Label::Ptr label);
 private:
 	const int WIDTH = 1280;
