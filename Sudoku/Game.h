@@ -11,12 +11,18 @@ public:
 	virtual ~Game() = default;
 	bool Init();
 	void Run();
+
+	// 메인 윈도우와 연결된 시그널
 	void CreateNewGameSignal();
+
+	// 자식 윈도우와 연결된 시그널
 	void CreateNewGameSignalFromChild(tgui::ChildWindow::Ptr childWindow);
-	void signalHandler(int row, int col, tgui::EditBox::Ptr widget, tgui::Label::Ptr label);
+
+	// EditBox와 연결된 시그널
+	void EditBoxSignalHandler(int row, int col, tgui::EditBox::Ptr widget, tgui::Label::Ptr label);
 private:
-	const int WIDTH = 1280;
-	const int HEIGHT = 720;
+	const int WIDTH = 1280; // 메인 윈도우의 가로 길이
+	const int HEIGHT = 720; // 메인 윈도우의 세로 길이
 	std::shared_ptr<tgui::Gui> mGui;
 	std::shared_ptr<Sudoku> mSudoku; // 스도쿠 게임
 	sf::RenderWindow mWindow;

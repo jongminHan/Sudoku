@@ -1,7 +1,5 @@
 ﻿#include "Sudoku.h"
 
-
-
 Sudoku::Sudoku()
 {
 	// 81개의 격자 위치를 무작위로 섞음
@@ -29,7 +27,6 @@ Sudoku::Sudoku()
 
 }
 
-
 void Sudoku::CreateSeed()
 {
 	SolveGridRecursive(); // 꽉찬 스도쿠를 생성
@@ -43,8 +40,6 @@ void Sudoku::CreateSeed()
 		}
 	}
 }
-
-
 
 bool Sudoku::FindUnassignedLocation(int grid[9][9], int& row, int& col)
 {
@@ -62,18 +57,15 @@ bool Sudoku::FindUnassignedLocation(int grid[9][9], int& row, int& col)
 	return false;
 }
 
-
 int Sudoku::GetGrid(int row, int col)
 {
 	return mGrid[row][col];
 }
 
-
 int Sudoku::GetSolutionGrid(int row, int col)
 {
 	return mSolnGrid[row][col];
 }
-
 
 bool Sudoku::SolveGridRecursive()
 {
@@ -108,8 +100,6 @@ bool Sudoku::SolveGridRecursive()
 	return false; // backtracking을 유도하는 지점
 }
 
-
-
 void Sudoku::CountSolnRecursive(int& number)
 {
 	int row, col;
@@ -131,9 +121,7 @@ void Sudoku::CountSolnRecursive(int& number)
 
 		mGrid[row][col] = UNASSIGNED;
 	}
-
 }
-
 
 void Sudoku::GenPuzzle()
 {

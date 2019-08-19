@@ -15,7 +15,7 @@ public:
 
 	virtual ~Sudoku() = default;
 
-	// seed 생성
+	// 스도쿠 seed 생성
 	void CreateSeed();
 
 	// 스도쿠를 푸는 함수. 재귀함수. Backtracking 기법 사용.
